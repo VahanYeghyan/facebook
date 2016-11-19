@@ -6,12 +6,6 @@
 
     <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
-        <class>com.tiko.facebook.entity.user.User</class>
-        <class>com.tiko.facebook.entity.authority.Authority</class>
-
-        <class>com.tiko.facebook.entity.oauthaccesstoken.OauthAccessToken</class>
-        <class>com.tiko.facebook.entity.oauthrefreshtoken.OauthRefreshToken</class>
     </persistence-unit>
 
 </persistence>
