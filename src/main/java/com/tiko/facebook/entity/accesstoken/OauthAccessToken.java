@@ -41,8 +41,6 @@ public class OauthAccessToken implements Serializable {
     @Column(name = "authentication")
     private byte[] authentication;
 
-    //    @OneToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "refresh_token", nullable = false)
     @Column(name = "refresh_token")
     private String refreshToken;
 

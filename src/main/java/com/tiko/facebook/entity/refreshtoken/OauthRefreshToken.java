@@ -1,11 +1,13 @@
 package com.tiko.facebook.entity.refreshtoken;
 
-import com.tiko.facebook.entity.accesstoken.OauthAccessToken;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -29,11 +31,6 @@ public class OauthRefreshToken implements Serializable {
 
     @Column(name = "authentication")
     private byte[] authentication;
-
-/*
-    @OneToOne(mappedBy = "refreshToken", fetch = FetchType.LAZY)
-    private OauthAccessToken oauthAccessToken;
-*/
 
     /*Getters and setter*/
     public String getTokenId() {
@@ -59,17 +56,6 @@ public class OauthRefreshToken implements Serializable {
     public void setAuthentication(final byte[] authentication) {
         this.authentication = authentication;
     }
-/*
-
-    public OauthAccessToken getOauthAccessToken() {
-        return oauthAccessToken;
-    }
-
-    public void setOauthAccessToken(final OauthAccessToken oauthAccessToken) {
-        this.oauthAccessToken = oauthAccessToken;
-    }
-*/
-
 
     @Override
     public boolean equals(final Object obj) {
@@ -87,7 +73,6 @@ public class OauthRefreshToken implements Serializable {
                 .append(this.getTokenId(), rhs.getTokenId())
                 .append(this.getToken(), rhs.getToken())
                 .append(this.getAuthentication(), rhs.getAuthentication())
-//                .append(this.getOauthAccessToken(), rhs.getOauthAccessToken())
                 .isEquals();
     }
 
@@ -97,7 +82,6 @@ public class OauthRefreshToken implements Serializable {
                 .append(getTokenId())
                 .append(getToken())
                 .append(getAuthentication())
-//                .append(getOauthAccessToken())
                 .toHashCode();
     }
 
@@ -107,7 +91,6 @@ public class OauthRefreshToken implements Serializable {
                 .append("tokenId", getTokenId())
                 .append("token", getToken())
                 .append("authentication", getAuthentication())
-//                .append("oauthAccessToken", getOauthAccessToken())
                 .toString();
     }
 }
