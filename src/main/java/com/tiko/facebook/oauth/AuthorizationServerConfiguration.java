@@ -42,7 +42,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .scopes("read", "write", "trust")
                 .accessTokenValiditySeconds(172800)
                 .refreshTokenValiditySeconds(864000)
+
                 .and()
+
                 .withClient("353b302c44574f565045687e534e7d6a")
                 .secret("286924697e615a672a646a493545646c")
                 .authorizedGrantTypes("password", "refresh_token")

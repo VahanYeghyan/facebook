@@ -1,39 +1,39 @@
-package com.tiko.facebook.entity.oauthaccesstoken;
+package com.tiko.facebook.entity.accesstoken;
 
-import com.tiko.facebook.entity.AbstractDomainEntityModel;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * User: Vazgen Danielyan
- * Date: 11/9/16
- * Time: 9:06 PM
+ * Date: 11/20/16
+ * Time: 10:45 PM
  */
 @Entity
 @Table(name = "oauth_access_token")
-@SequenceGenerator(name = "sequence_generator", sequenceName = "oauth_access_token_seq")
-public class OauthAccessToken extends AbstractDomainEntityModel {
+public class OauthAccessToken implements Serializable {
 
-    private static final long serialVersionUID = 4240086744202646810L;
+    private static final long serialVersionUID = 2538480221027920111L;
 
     /*Properties*/
+    @Id
+    @Column(name = "authentication_id")
+    private String authenticationId;
+
     @Column(name = "token_id")
     private String tokenId;
 
     @Column(name = "token")
     private byte[] token;
 
-    @Column(name = "authentication_id")
-    private String authenticationId;
-
     @Column(name = "user_name")
-    private String userName;
+    private String username;
 
     @Column(name = "client_id")
     private String clientId;
@@ -41,11 +41,21 @@ public class OauthAccessToken extends AbstractDomainEntityModel {
     @Column(name = "authentication")
     private byte[] authentication;
 
+    //    @OneToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "refresh_token", nullable = false)
     @Column(name = "refresh_token")
     private String refreshToken;
 
 
     /*Getters and setters*/
+    public String getAuthenticationId() {
+        return authenticationId;
+    }
+
+    public void setAuthenticationId(final String authenticationId) {
+        this.authenticationId = authenticationId;
+    }
+
     public String getTokenId() {
         return tokenId;
     }
@@ -62,20 +72,12 @@ public class OauthAccessToken extends AbstractDomainEntityModel {
         this.token = token;
     }
 
-    public String getAuthenticationId() {
-        return authenticationId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAuthenticationId(final String authenticationId) {
-        this.authenticationId = authenticationId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(final String userName) {
-        this.userName = userName;
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
     public String getClientId() {
@@ -116,11 +118,10 @@ public class OauthAccessToken extends AbstractDomainEntityModel {
         }
         final OauthAccessToken rhs = (OauthAccessToken) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
+                .append(this.getAuthenticationId(), rhs.getAuthenticationId())
                 .append(this.getTokenId(), rhs.getTokenId())
                 .append(this.getToken(), rhs.getToken())
-                .append(this.getAuthenticationId(), rhs.getAuthenticationId())
-                .append(this.getUserName(), rhs.getUserName())
+                .append(this.getUsername(), rhs.getUsername())
                 .append(this.getClientId(), rhs.getClientId())
                 .append(this.getAuthentication(), rhs.getAuthentication())
                 .append(this.getRefreshToken(), rhs.getRefreshToken())
@@ -130,11 +131,10 @@ public class OauthAccessToken extends AbstractDomainEntityModel {
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
+                .append(getAuthenticationId())
                 .append(getTokenId())
                 .append(getToken())
-                .append(getAuthenticationId())
-                .append(getUserName())
+                .append(getUsername())
                 .append(getClientId())
                 .append(getAuthentication())
                 .append(getRefreshToken())
@@ -144,11 +144,10 @@ public class OauthAccessToken extends AbstractDomainEntityModel {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .appendSuper(super.toString())
+                .append("authenticationId", getAuthenticationId())
                 .append("tokenId", getTokenId())
                 .append("token", getToken())
-                .append("authenticationId", getAuthenticationId())
-                .append("userName", getUserName())
+                .append("username", getUsername())
                 .append("clientId", getClientId())
                 .append("authentication", getAuthentication())
                 .append("refreshToken", getRefreshToken())

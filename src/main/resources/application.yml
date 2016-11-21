@@ -1,18 +1,19 @@
 spring:
+  datasource:
+    name: tiko_facebook_datasource
+    username: tiko_facebook
+    password: tiko_facebook
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/tiko_facebook
   jpa:
     database: POSTGRESQL
     generate-ddl: true
     open-in-view: true
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
       naming:
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
-  datasource:
-    username: tiko_facebook
-    password: tiko_facebook
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://127.0.0.1:5432/tiko_facebook
 logging:
   level:
     ROOT: info

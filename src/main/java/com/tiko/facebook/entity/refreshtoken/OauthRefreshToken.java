@@ -1,29 +1,26 @@
-package com.tiko.facebook.entity.oauthrefreshtoken;
+package com.tiko.facebook.entity.refreshtoken;
 
-import com.tiko.facebook.entity.AbstractDomainEntityModel;
+import com.tiko.facebook.entity.accesstoken.OauthAccessToken;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * User: Vazgen Danielyan
- * Date: 11/9/16
- * Time: 9:13 PM
+ * Date: 11/20/16
+ * Time: 10:58 PM
  */
 @Entity
 @Table(name = "oauth_refresh_token")
-@SequenceGenerator(name = "sequence_generator", sequenceName = "oauth_refresh_token_seq")
-public class OauthRefreshToken extends AbstractDomainEntityModel {
+public class OauthRefreshToken implements Serializable {
 
-    private static final long serialVersionUID = 2426951233375687528L;
-
+    private static final long serialVersionUID = 632759132130413163L;
 
     /*Properties*/
+    @Id
     @Column(name = "token_id")
     private String tokenId;
 
@@ -33,8 +30,12 @@ public class OauthRefreshToken extends AbstractDomainEntityModel {
     @Column(name = "authentication")
     private byte[] authentication;
 
+/*
+    @OneToOne(mappedBy = "refreshToken", fetch = FetchType.LAZY)
+    private OauthAccessToken oauthAccessToken;
+*/
 
-    /*Getters and setters*/
+    /*Getters and setter*/
     public String getTokenId() {
         return tokenId;
     }
@@ -58,6 +59,16 @@ public class OauthRefreshToken extends AbstractDomainEntityModel {
     public void setAuthentication(final byte[] authentication) {
         this.authentication = authentication;
     }
+/*
+
+    public OauthAccessToken getOauthAccessToken() {
+        return oauthAccessToken;
+    }
+
+    public void setOauthAccessToken(final OauthAccessToken oauthAccessToken) {
+        this.oauthAccessToken = oauthAccessToken;
+    }
+*/
 
 
     @Override
@@ -73,30 +84,30 @@ public class OauthRefreshToken extends AbstractDomainEntityModel {
         }
         final OauthRefreshToken rhs = (OauthRefreshToken) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(this.getTokenId(), rhs.getTokenId())
                 .append(this.getToken(), rhs.getToken())
                 .append(this.getAuthentication(), rhs.getAuthentication())
+//                .append(this.getOauthAccessToken(), rhs.getOauthAccessToken())
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
-                .appendSuper(super.hashCode())
                 .append(getTokenId())
                 .append(getToken())
                 .append(getAuthentication())
+//                .append(getOauthAccessToken())
                 .toHashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .appendSuper(super.toString())
                 .append("tokenId", getTokenId())
                 .append("token", getToken())
                 .append("authentication", getAuthentication())
+//                .append("oauthAccessToken", getOauthAccessToken())
                 .toString();
     }
 }
