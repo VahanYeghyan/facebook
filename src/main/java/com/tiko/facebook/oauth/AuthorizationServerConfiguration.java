@@ -68,4 +68,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         oauthServer.realm(REALM + "/client");
     }
 
+
+
 }

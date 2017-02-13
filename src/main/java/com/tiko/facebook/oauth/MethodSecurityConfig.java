@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
  * Date: 11/19/16
  * Time: 6:24 PM
  */
-@Configuration
+
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
